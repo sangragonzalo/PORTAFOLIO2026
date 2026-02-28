@@ -304,12 +304,12 @@ const Navbar = () => {
 };
 
 const SectionHeader: FC<{ title: string; subtitle?: string; centered?: boolean }> = ({ title, subtitle, centered }) => (
-  <div className={`mb-16 ${centered ? 'text-center' : ''}`}>
+  <div className={`mb-12 md:mb-20 ${centered ? 'text-center' : ''}`}>
     <motion.h2
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      className="text-5xl md:text-7xl font-display font-bold mb-6 tracking-tighter"
+      className="text-4xl md:text-7xl font-display font-bold mb-4 md:mb-6 tracking-tighter"
     >
       {title}
     </motion.h2>
@@ -319,7 +319,7 @@ const SectionHeader: FC<{ title: string; subtitle?: string; centered?: boolean }
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ delay: 0.1 }}
-        className={`text-white/40 max-w-2xl ${centered ? 'mx-auto' : ''} text-lg`}
+        className={`text-white/40 max-w-2xl ${centered ? 'mx-auto' : ''} text-sm md:text-lg leading-relaxed`}
       >
         {subtitle}
       </motion.p>
@@ -385,15 +385,15 @@ const ProjectCard: FC<{ project: Project; onImageClick: (img: string) => void }>
         />
       )}
     </div>
-    <div className="p-6">
-      <span className="text-[9px] font-bold text-emerald-400 uppercase tracking-[0.2em] mb-2 block">
+    <div className="p-4 md:p-6">
+      <span className="text-[8px] md:text-[9px] font-bold text-emerald-400 uppercase tracking-[0.2em] mb-1 md:mb-2 block">
         {project.category}
       </span>
-      <h3 className="text-xl font-display font-bold mb-2">{project.title}</h3>
-      <p className="text-white/40 text-xs mb-4 leading-relaxed line-clamp-2">{project.description}</p>
-      <div className="flex flex-wrap gap-1.5">
+      <h3 className="text-lg md:text-xl font-display font-bold mb-1 md:mb-2">{project.title}</h3>
+      <p className="text-white/40 text-[10px] md:text-xs mb-3 md:mb-4 leading-relaxed line-clamp-2">{project.description}</p>
+      <div className="flex flex-wrap gap-1 md:gap-1.5">
         {project.tags.map(tag => (
-          <span key={tag} className="text-[8px] px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-white/30 uppercase tracking-wider">
+          <span key={tag} className="text-[7px] md:text-[8px] px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-white/30 uppercase tracking-wider">
             {tag}
           </span>
         ))}
@@ -508,7 +508,7 @@ export default function App() {
       <Navbar />
 
       {/* Hero / Intro */}
-      <section className="relative h-screen flex items-center justify-center overflow-hidden px-6">
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden px-4 md:px-6">
         <motion.div
           className="absolute inset-0 z-0 bg-zinc-900"
           initial={{ opacity: 0 }}
@@ -524,14 +524,16 @@ export default function App() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1 }}
           >
-            <h1 className="text-7xl md:text-9xl font-display font-bold mb-8 tracking-tighter leading-[0.85]">
+            <h1 className="text-5xl sm:text-7xl md:text-9xl font-display font-bold mb-6 md:mb-8 tracking-tighter leading-[0.9] md:leading-[0.85]">
               GONZALO <br /> <span className="gradient-text">SANGRA</span>
             </h1>
-            <div className="flex flex-col md:flex-row items-center justify-center gap-6 text-white/40 uppercase tracking-[0.3em] text-[10px] font-bold">
+            <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-6 text-white/40 uppercase tracking-[0.2em] md:tracking-[0.3em] text-[8px] md:text-[10px] font-bold">
               <span>Comunicador Visual</span>
               <div className="hidden md:block w-12 h-[1px] bg-white/10" />
+              <span className="md:hidden opacity-20">/</span>
               <span>Artista Integral</span>
               <div className="hidden md:block w-12 h-[1px] bg-white/10" />
+              <span className="md:hidden opacity-20">/</span>
               <span>AI Implementation Expert</span>
             </div>
           </motion.div>
@@ -539,18 +541,18 @@ export default function App() {
       </section>
 
       {/* Section 1: Sobre Mí */}
-      <section id="about" className="py-40 px-6 max-w-7xl mx-auto">
-        <div className="grid lg:grid-cols-2 gap-24 items-center">
+      <section id="about" className="py-20 md:py-40 px-4 md:px-6 max-w-7xl mx-auto">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-24 items-center">
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
           >
-            <span className="text-emerald-400 font-bold uppercase tracking-[0.3em] text-xs mb-6 block">01 / Biografía</span>
-            <h2 className="text-5xl md:text-7xl font-display font-bold mb-10 tracking-tighter leading-none">
+            <span className="text-emerald-400 font-bold uppercase tracking-[0.3em] text-[10px] md:text-xs mb-4 md:mb-6 block">01 / Biografía</span>
+            <h2 className="text-4xl md:text-7xl font-display font-bold mb-6 md:mb-10 tracking-tighter leading-tight md:leading-none">
               El arte de <br /> conectar mundos.
             </h2>
-            <div className="space-y-6 text-xl text-white/60 leading-relaxed font-light">
+            <div className="space-y-4 md:space-y-6 text-base md:text-xl text-white/60 leading-relaxed font-light">
               <p>
                 Soy Gonzalo Sangrá, un comunicador visual y artista integral con base en San Luis, Argentina. Mi trayectoria es un recorrido por la arquitectura, el diseño y la tecnología, lo que me ha permitido desarrollar una visión única donde la precisión técnica se encuentra con la sensibilidad artística.
               </p>
@@ -561,12 +563,12 @@ export default function App() {
                 Hoy, mi propósito es potenciar marcas y proyectos a través de una comunicación visual estratégica, utilizando herramientas de vanguardia como Gemini y Antigravity para crear experiencias digitales que no solo se ven bien, sino que funcionan bien.
               </p>
             </div>
-            <div className="flex flex-wrap gap-4 mt-10">
+            <div className="flex flex-col sm:flex-row gap-4 mt-8 md:mt-12">
               <a
                 href="/assets/profile/gonzalo-cv.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-emerald-400/10 border border-emerald-400/30 text-emerald-400 text-sm font-bold uppercase tracking-widest hover:bg-emerald-400/20 transition-colors"
+                className="inline-flex items-center justify-center gap-3 px-6 py-4 md:py-3 rounded-full bg-emerald-400/10 border border-emerald-400/30 text-emerald-400 text-[10px] md:text-sm font-bold uppercase tracking-widest hover:bg-emerald-400/20 transition-colors w-full sm:w-auto"
               >
                 <Download size={18} /> Descargar CV
               </a>
@@ -574,7 +576,7 @@ export default function App() {
                 href="/assets/profile/gonzalo-portfolio.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-white/5 border border-white/10 text-white/60 text-sm font-bold uppercase tracking-widest hover:bg-white/10 transition-colors"
+                className="inline-flex items-center justify-center gap-3 px-6 py-4 md:py-3 rounded-full bg-white/5 border border-white/10 text-white/60 text-[10px] md:text-sm font-bold uppercase tracking-widest hover:bg-white/10 transition-colors w-full sm:w-auto"
               >
                 <FileDown size={18} /> Ver Portafolio PDF
               </a>
@@ -585,13 +587,13 @@ export default function App() {
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="relative"
+            className="relative order-first lg:order-last"
           >
-            <div className="aspect-[4/5] rounded-[40px] overflow-hidden glass p-4">
+            <div className="aspect-[4/5] rounded-[32px] md:rounded-[40px] overflow-hidden glass p-3 md:p-4">
               <img
                 src="/assets/profile/gonzalo-photo.jpg"
                 alt="Gonzalo Sangrá"
-                className="w-full h-full object-cover rounded-[32px]"
+                className="w-full h-full object-cover rounded-[24px] md:rounded-[32px]"
               />
             </div>
             <div className="absolute -top-12 -right-12 w-48 h-48 bg-emerald-400/20 rounded-full blur-[100px]" />
@@ -634,6 +636,42 @@ export default function App() {
                 <ProjectCard key={project.id} project={project} onImageClick={setSelectedImage} />
               ))}
             </div>
+          </div>
+
+          {/* Web Development Section */}
+          <div id="web" className="mb-24 md:mb-32 px-4 md:px-0">
+            <div className="flex items-center gap-4 mb-12">
+              <div className="h-[1px] flex-1 bg-white/10" />
+              <h3 className="text-[10px] md:text-xs font-bold uppercase tracking-[0.4em] text-white/30">Desarrollo Web</h3>
+              <div className="h-[1px] flex-1 bg-white/10" />
+            </div>
+            <motion.div
+              whileHover={{ scale: 1.01 }}
+              className="max-w-5xl mx-auto rounded-[32px] md:rounded-[40px] overflow-hidden glass p-3 md:p-8 border border-white/5 relative group"
+            >
+              <div className="aspect-video md:aspect-[16/9] rounded-[20px] md:rounded-[24px] overflow-hidden border border-white/10 bg-black/40 relative">
+                <iframe
+                  src="https://caffeto-web2-0.vercel.app/"
+                  className="w-full h-full border-none opacity-80 group-hover:opacity-100 transition-opacity"
+                  title="Cafetto Preview"
+                />
+                <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                <div className="absolute bottom-4 md:bottom-8 left-4 md:left-8 right-4 md:right-8 flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4">
+                  <div>
+                    <h3 className="text-xl md:text-3xl font-display font-bold mb-1 md:mb-2">Cafetto</h3>
+                    <p className="text-white/60 text-[10px] md:text-sm max-w-md hidden sm:block font-light">Ecosistema digital premium para café de especialidad. Optimizada con Gemini Pro.</p>
+                  </div>
+                  <a
+                    href="https://caffeto-web2-0.vercel.app/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-3 md:p-4 rounded-full bg-emerald-400 text-black hover:scale-110 transition-transform flex items-center justify-center gap-2 font-bold uppercase tracking-widest text-[9px] md:text-xs pointer-events-auto w-full sm:w-auto"
+                  >
+                    <Globe size={18} /> Visitar Sitio
+                  </a>
+                </div>
+              </div>
+            </motion.div>
           </div>
 
           {/* 3D & Blender */}
