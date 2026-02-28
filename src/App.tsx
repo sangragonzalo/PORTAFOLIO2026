@@ -669,42 +669,6 @@ export default function App() {
             </div>
           </div>
 
-          {/* Web Development Section */}
-          <div id="web" className="mb-24 md:mb-32 px-4 md:px-0">
-            <div className="flex items-center gap-4 mb-12">
-              <div className="h-[1px] flex-1 bg-white/10" />
-              <h3 className="text-[10px] md:text-xs font-bold uppercase tracking-[0.4em] text-white/30">Desarrollo Web</h3>
-              <div className="h-[1px] flex-1 bg-white/10" />
-            </div>
-            <motion.div
-              whileHover={{ scale: 1.01 }}
-              className="max-w-5xl mx-auto rounded-[32px] md:rounded-[40px] overflow-hidden glass p-3 md:p-8 border border-white/5 relative group"
-            >
-              <div className="aspect-video md:aspect-[16/9] rounded-[20px] md:rounded-[24px] overflow-hidden border border-white/10 bg-black/40 relative">
-                <iframe
-                  src="https://caffeto-web2-0.vercel.app/"
-                  className="w-full h-full border-none opacity-80 group-hover:opacity-100 transition-opacity"
-                  title="Cafetto Preview"
-                />
-                <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-                <div className="absolute bottom-4 md:bottom-8 left-4 md:left-8 right-4 md:right-8 flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4">
-                  <div>
-                    <h3 className="text-xl md:text-3xl font-display font-bold mb-1 md:mb-2">Cafetto</h3>
-                    <p className="text-white/60 text-[10px] md:text-sm max-w-md hidden sm:block font-light">Ecosistema digital premium para café de especialidad. Optimizada con Gemini Pro.</p>
-                  </div>
-                  <a
-                    href="https://caffeto-web2-0.vercel.app/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p-3 md:p-4 rounded-full bg-emerald-400 text-black hover:scale-110 transition-transform flex items-center justify-center gap-2 font-bold uppercase tracking-widest text-[9px] md:text-xs pointer-events-auto w-full sm:w-auto"
-                  >
-                    <Globe size={18} /> Visitar Sitio
-                  </a>
-                </div>
-              </div>
-            </motion.div>
-          </div>
-
           {/* 3D & Blender */}
           <div className="mb-32">
             <div className="flex items-center gap-4 mb-12">
@@ -733,39 +697,70 @@ export default function App() {
             </div>
           </div>
 
+          {/* Unificada: Desarrollo Web / Cafetto (Al final como 'Mención Especial') */}
+          <div id="web" className="mb-32 px-4 md:px-0">
+            <div className="flex items-center gap-4 mb-12">
+              <div className="h-[1px] flex-1 bg-white/10" />
+              <h3 className="text-[10px] md:text-xs font-bold uppercase tracking-[0.4em] text-white/30">Desarrollo Web Integral con IA</h3>
+              <div className="h-[1px] flex-1 bg-white/10" />
+            </div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="max-w-5xl mx-auto rounded-[40px] overflow-hidden bg-gradient-to-br from-emerald-900/10 to-cyan-900/10 border border-white/5 p-4 md:p-12 relative group"
+            >
+              <div className="grid lg:grid-cols-5 gap-8 items-center">
+                <div className="lg:col-span-3 aspect-video rounded-[24px] overflow-hidden border border-white/10 bg-black/40 relative order-2 lg:order-1">
+                  <iframe
+                    src="https://caffeto-web2-0.vercel.app/"
+                    className="w-full h-full border-none opacity-80 group-hover:opacity-100 transition-opacity"
+                    title="Cafetto Preview"
+                  />
+                  <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-black/60 to-transparent" />
+                </div>
+
+                <div className="lg:col-span-2 text-left space-y-6 order-1 lg:order-2">
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-400/10 border border-emerald-400/20 text-emerald-400 text-[9px] font-bold uppercase tracking-widest">
+                    <Zap size={12} /> Mención Especial: Cafetto
+                  </div>
+                  <h3 className="text-3xl md:text-5xl font-display font-bold tracking-tighter">Desarrollo Web Integral</h3>
+                  <p className="text-white/60 text-sm md:text-base leading-relaxed font-light">
+                    El proyecto Cafetto representa la cúspide de mi flujo de trabajo actual. Utilizando <span className="text-white font-bold">Gemini</span> para la optimización de contenido y <span className="text-white font-bold">Antigravity</span> para un desarrollo ágil que redefine la comunicación visual.
+                  </p>
+
+                  <div className="flex gap-4 pt-4">
+                    <div className="flex flex-col items-center gap-1">
+                      <div className="w-10 h-10 rounded-xl glass flex items-center justify-center text-emerald-400">
+                        <Cpu size={20} />
+                      </div>
+                      <span className="text-[8px] font-bold uppercase tracking-widest text-white/40">Gemini AI</span>
+                    </div>
+                    <div className="flex flex-col items-center gap-1">
+                      <div className="w-10 h-10 rounded-xl glass flex items-center justify-center text-cyan-400">
+                        <Box size={20} />
+                      </div>
+                      <span className="text-[8px] font-bold uppercase tracking-widest text-white/40">Antigravity</span>
+                    </div>
+                  </div>
+
+                  <a
+                    href="https://caffeto-web2-0.vercel.app/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-emerald-400 text-black hover:scale-105 transition-transform font-bold uppercase tracking-widest text-xs w-full sm:w-auto mt-4"
+                  >
+                    <Globe size={18} /> Visitar Sitio
+                  </a>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+
+
           {/* Reels & Ads */}
 
-          {/* Special Mention: Cafetto */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="relative rounded-[40px] overflow-hidden bg-gradient-to-br from-emerald-900/20 to-cyan-900/20 border border-white/5 p-12 md:p-20 text-center"
-          >
-            <div className="max-w-3xl mx-auto">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-400/10 border border-emerald-400/20 text-emerald-400 text-[10px] font-bold uppercase tracking-widest mb-8">
-                <Zap size={14} /> Mención Especial: Cafetto
-              </div>
-              <h3 className="text-4xl md:text-6xl font-display font-bold mb-8 tracking-tighter">Desarrollo Web Integral con IA</h3>
-              <p className="text-xl text-white/60 mb-12 leading-relaxed">
-                El proyecto Cafetto representa la cúspide de mi flujo de trabajo actual. Utilizando <span className="text-white font-bold">Gemini</span> para la optimización de contenido y <span className="text-white font-bold">Antigravity</span> para un desarrollo ágil, logramos una plataforma que redefine la comunicación visual de la marca.
-              </p>
-              <div className="flex justify-center gap-6">
-                <div className="flex flex-col items-center gap-2">
-                  <div className="w-16 h-16 rounded-2xl glass flex items-center justify-center text-emerald-400">
-                    <Cpu size={32} />
-                  </div>
-                  <span className="text-[10px] font-bold uppercase tracking-widest text-white/40">Gemini AI</span>
-                </div>
-                <div className="flex flex-col items-center gap-2">
-                  <div className="w-16 h-16 rounded-2xl glass flex items-center justify-center text-cyan-400">
-                    <Box size={32} />
-                  </div>
-                  <span className="text-[10px] font-bold uppercase tracking-widest text-white/40">Antigravity</span>
-                </div>
-              </div>
-            </div>
-          </motion.div>
         </div>
       </section>
 
