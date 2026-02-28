@@ -406,6 +406,8 @@ const VideoPlayer: FC<{ video: VideoProject; vertical?: boolean }> = ({ video, v
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(true);
   const [isMuted, setIsMuted] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
+  const [hasError, setHasError] = useState(false);
 
   const togglePlay = () => {
     if (videoRef.current) {
@@ -423,42 +425,71 @@ const VideoPlayer: FC<{ video: VideoProject; vertical?: boolean }> = ({ video, v
   };
 
   return (
-    <div className={`relative ${vertical ? 'aspect-[9/16]' : 'aspect-video'} rounded-3xl overflow-hidden glass group cursor-pointer`}>
-      <video
-        ref={videoRef}
-        src={video.videoUrl}
-        poster={video.thumbnail}
-        className="w-full h-full object-cover"
-        autoPlay
-        muted
-        loop
-        playsInline
-        onClick={togglePlay}
-      />
+    <div className={`relative ${vertical ? 'aspect-[9/16]' : 'aspect-video'} rounded-3xl overflow-hidden glass group cursor-pointer bg-zinc-900/50`}>
+      {isLoading && !hasError && (
+        <div className="absolute inset-0 flex items-center justify-center z-10 bg-black/20">
+          <div className="w-8 h-8 border-2 border-emerald-400 border-t-transparent rounded-full animate-spin" />
+        </div>
+      )}
+
+      {hasError ? (
+        <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center bg-zinc-900">
+          <X size={32} className="text-red-400 mb-4 opacity-50" />
+          <p className="text-[10px] uppercase tracking-widest text-white/40 mb-2">Error al cargar video</p>
+          <p className="text-xs text-white/60 font-medium">{video.title}</p>
+        </div>
+      ) : (
+        <video
+          ref={videoRef}
+          poster={video.thumbnail}
+          className={`w-full h-full object-cover transition-opacity duration-500 ${isLoading ? 'opacity-0' : 'opacity-100'}`}
+          autoPlay
+          muted
+          loop
+          playsInline
+          onCanPlay={() => setIsLoading(false)}
+          onError={() => {
+            console.error(`Error loading video: ${video.videoUrl}`);
+            setHasError(true);
+            setIsLoading(false);
+          }}
+          onClick={togglePlay}
+          preload="metadata"
+        >
+          <source src={video.videoUrl} type="video/mp4" />
+          Tu navegador no soporta videos HTML5.
+        </video>
+      )}
 
       {/* Overlay simple para info */}
-      <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent p-6 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
-        <h4 className="text-sm font-display font-medium text-white/90 uppercase tracking-widest">{video.title}</h4>
-      </div>
+      {!hasError && (
+        <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent p-6 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+          <h4 className="text-sm font-display font-medium text-white/90 uppercase tracking-widest">{video.title}</h4>
+        </div>
+      )}
 
       {/* Controles Custom */}
-      <div className="absolute top-4 right-4 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity z-20">
-        <button
-          onClick={(e) => { e.stopPropagation(); toggleMute(); }}
-          className="p-2 rounded-full bg-black/50 text-white hover:bg-emerald-400/50 backdrop-blur-md transition-colors"
-        >
-          {isMuted ? <VolumeX size={16} /> : <Volume2 size={16} />}
-        </button>
-      </div>
+      {!hasError && (
+        <div className="absolute top-4 right-4 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity z-20">
+          <button
+            onClick={(e) => { e.stopPropagation(); toggleMute(); }}
+            className="p-2 rounded-full bg-black/50 text-white hover:bg-emerald-400/50 backdrop-blur-md transition-colors"
+          >
+            {isMuted ? <VolumeX size={16} /> : <Volume2 size={16} />}
+          </button>
+        </div>
+      )}
 
       {/* Play/Pause Button Indicator */}
-      <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
-        {!isPlaying && (
-          <div className="p-4 rounded-full bg-black/50 text-white backdrop-blur-md">
-            <Play size={32} />
-          </div>
-        )}
-      </div>
+      {!hasError && !isLoading && (
+        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+          {!isPlaying && (
+            <div className="p-4 rounded-full bg-black/50 text-white backdrop-blur-md">
+              <Play size={32} />
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 };
@@ -702,41 +733,7 @@ export default function App() {
             </div>
           </div>
 
-          {/* Web Development Section */}
-          <div id="web" className="mb-40">
-            <SectionHeader
-              title="Desarrollo Web"
-              subtitle="Creación de plataformas digitales optimizadas con IA y las últimas tecnologías del mercado."
-              centered
-            />
-            <motion.div
-              whileHover={{ scale: 1.02 }}
-              className="max-w-5xl mx-auto rounded-[40px] overflow-hidden glass p-4 md:p-8 border border-white/5 relative group"
-            >
-              <div className="aspect-[16/9] rounded-[24px] overflow-hidden border border-white/10 bg-black/40 relative">
-                <iframe
-                  src="https://caffeto-web2-0.vercel.app/"
-                  className="w-full h-full border-none opacity-80 group-hover:opacity-100 transition-opacity"
-                  title="Cafetto Preview"
-                />
-                <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-black/60 to-transparent" />
-                <div className="absolute bottom-8 left-8 right-8 flex justify-between items-end">
-                  <div>
-                    <h3 className="text-3xl font-display font-bold mb-2">Cafetto</h3>
-                    <p className="text-white/60 text-sm max-w-md">Una plataforma premium de café diseñada para una experiencia de usuario fluida y estética. Optimizada con Gemini Pro.</p>
-                  </div>
-                  <a
-                    href="https://caffeto-web2-0.vercel.app/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p-4 rounded-full bg-emerald-400 text-black hover:scale-110 transition-transform flex items-center gap-2 font-bold uppercase tracking-widest text-xs pointer-events-auto"
-                  >
-                    <Globe size={18} /> Visitar Sitio
-                  </a>
-                </div>
-              </div>
-            </motion.div>
-          </div>
+          {/* Reels & Ads */}
 
           {/* Special Mention: Cafetto */}
           <motion.div
